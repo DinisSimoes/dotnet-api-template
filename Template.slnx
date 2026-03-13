@@ -1,4 +1,12 @@
 <Solution>
+  <Folder Name="/docker/">
+    <File Path="docker-compose.yml" />
+    <File Path="Dockerfile" />
+  </Folder>
+  <Folder Name="/docs/">
+    <File Path="architecture.md" />
+    <File Path="diagrams.md" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/Template.Api/Template.Api.csproj" />
     <Project Path="src/Template.Application/Template.Application.csproj" />

@@ -1,41 +1,88 @@
+using OpenTelemetry.Trace;
+using Serilog;
+using Template.Api.Middlewares;
+using Template.Application.DependencyInjection;
+using Template.Infrastructure.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
+// -------------------------
+// Logging (Serilog)
+// -------------------------
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+
+// -------------------------
+// Controllers
+// -------------------------
+builder.Services.AddControllers();
+
+
+// -------------------------
+// Swagger
+// -------------------------
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
+// -------------------------
+// Health Checks
+// -------------------------
+builder.Services.AddHealthChecks();
+
+
+// -------------------------
+// Options Pattern
+// -------------------------
+builder.Services.ConfigureOptions(builder.Configuration);
+
+
+// -------------------------
+// Dependency Injection Layers
+// -------------------------
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
+
+
+// -------------------------
+// OpenTelemetry (base)
+// -------------------------
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing =>
+    {
+        tracing.AddAspNetCoreInstrumentation();
+    });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
+// -------------------------
+// Middleware pipeline
+// -------------------------
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseSerilogRequestLogging();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+app.UseAuthorization();
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+app.MapControllers();
+
+app.MapHealthChecks("/health");
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
