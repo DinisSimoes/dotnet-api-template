@@ -1,0 +1,11 @@
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\bin\Debug\net10.0\Template.Domain.deps.json
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\bin\Debug\net10.0\Template.Domain.dll
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\bin\Debug\net10.0\Template.Domain.pdb
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\obj\Debug\net10.0\Template.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\obj\Debug\net10.0\Template.Domain.AssemblyInfoInputs.cache
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\obj\Debug\net10.0\Template.Domain.AssemblyInfo.cs
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\obj\Debug\net10.0\Template.Domain.csproj.CoreCompileInputs.cache
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\obj\Debug\net10.0\Template.Domain.dll
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\obj\Debug\net10.0\refint\Template.Domain.dll
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\obj\Debug\net10.0\Template.Domain.pdb
+C:\Users\simoe\Desktop\GIT\my_projects\dotnet-api-template\src\Template.Domain\obj\Debug\net10.0\ref\Template.Domain.dll
